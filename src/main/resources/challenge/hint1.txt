@@ -1,0 +1,7 @@
+Frequency Analysis
+
+A cryptanalysis method that uses how often letters appear in a language to break ciphers.
+In English, some letters show up far more than others. By matching ciphertext letter frequencies to English ones, you can guess the substitution.
+
+Most common English letters (in order):
+E, T, A, O, I, N, S, H, R, D, L, C … (least common: Q, Z, X, J)
