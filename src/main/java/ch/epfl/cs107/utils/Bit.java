@@ -55,7 +55,7 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInLSB(int value, boolean m){
-        return Helper.fail("NOT IMPLEMENTED");
+        return Bit.embedInXthBit(value, m, 0);
     }
 
     /**
