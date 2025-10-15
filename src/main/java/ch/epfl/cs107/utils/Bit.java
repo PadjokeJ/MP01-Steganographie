@@ -36,7 +36,15 @@ public final class Bit {
      * @return embedded value
      */
     public static int embedInXthBit(int value, boolean m, int pos) {
-        return Helper.fail("NOT IMPLEMENTED");
+        int mask = 1 << pos;
+        mask = ~mask;
+        int valueToAdd = 0;
+        if (m) {
+            valueToAdd = 1 << pos;
+        }
+        int newval = value & mask;
+        newval = newval | valueToAdd;
+        return newval;
     }
 
     /**
@@ -68,7 +76,7 @@ public final class Bit {
      * @return <code>true</code> if the bit is '1' and <code>false</code> otherwise
      */
     public static boolean getLSB(int value) {
-          return getXthBit(value, 0);
+        return getXthBit(value, 0);
     }
 
     // ============================================================================================
