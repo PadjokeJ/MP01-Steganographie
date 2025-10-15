@@ -100,7 +100,11 @@ public final class Bit {
      * @return bit array representation of the value
      */
     public static boolean[] toBitArray(byte value){
-        return Helper.fail("NOT IMPLEMENTED");
+        boolean[] bools = new boolean[8]
+        for (int i = 0; i < 8; i++) {
+            bools[i] = Bit.getXthBit((int) value, i);
+        }
+        return bools;
     }
 
     /**
