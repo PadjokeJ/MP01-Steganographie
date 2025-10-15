@@ -76,7 +76,7 @@ public final class Bit {
      * @return <code>true</code> if the bit is '1' and <code>false</code> otherwise
      */
     public static boolean getLSB(int value) {
-        return getXthBit(value, 0);
+        return Bit.getXthBit(value, 0);
     }
 
     // ============================================================================================
