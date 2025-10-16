@@ -35,7 +35,14 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] caesar(byte[] cipher, byte key) {
-        return Helper.fail("NOT IMPLEMENTED");
+        byte[] bytes = new byte[cipher.length];
+        for(int i=0;i<cipher.length;i++){
+            if(cipher[i]+key<-128){
+                bytes[i]= (byte) (cipher[i]+key+255);
+            }if(cipher[i]+key>-128){
+                bytes[i]= (byte) (cipher[i]+key);
+            }
+        return bytes;
     }
 
     // ============================================================================================
