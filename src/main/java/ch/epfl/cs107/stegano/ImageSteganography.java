@@ -22,6 +22,15 @@ public final class ImageSteganography {
 
     // DO NOT CHANGE THIS, MORE ON THAT ON WEEK 7
     private ImageSteganography(){}
+    
+    static boolean containsNullLines(int[][] image) {
+        for (int[] line: image) {
+            if (line == null) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // ============================================================================================
     // ================================== EMBEDDING METHODS =======================================
@@ -37,6 +46,7 @@ public final class ImageSteganography {
     public static int[][] embedARGB(int[][] cover, int[][] argbImage, int threshold){
         assert argbImage != null;
         assert cover != null;
+        assert !containsNullLines(argbImage);
 
         int[][] image;
         int[][] grayImage;
@@ -56,6 +66,7 @@ public final class ImageSteganography {
     public static int[][] embedGray(int[][] cover, int[][] grayImage, int threshold){
         assert grayImage != null;
         assert cover != null;
+        assert !containsNullLines(grayImage);
 
         int[][] image;
         boolean[][] bwImage;
@@ -75,6 +86,10 @@ public final class ImageSteganography {
         assert load != null;
         assert cover != null;
         assert (cover.length >= load.length) && (cover[0].length >= load[0].length);
+        assert !containsNullLines(cover);
+
+        assert cover.length > 0 && cover[0].length > 0;
+        assert load.length > 0 && load[0].length > 0;
 
         int[][] image = new int[cover.length][cover[0].length];
         
