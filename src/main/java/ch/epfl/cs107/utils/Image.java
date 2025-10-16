@@ -113,7 +113,14 @@ public final class Image {
      * @return gray scaling of the given pixel
      */
     public static int gray(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        int gray = 0;
+        gray += ((int) Image.red(pixel)) & 0xFF;
+        gray += ((int) Image.green(pixel)) & 0xFF;
+        gray += ((int) Image.blue(pixel)) & 0xFF;
+
+        gray /= 3;
+        
+        return gray;
     }
 
     /**
