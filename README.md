@@ -18,7 +18,11 @@ MP 01 de CS107, rédigé par Arthur Delémont et Jonatan Pfister
 ### stegano
 
 - [ ] ImageSteganography.java
+  - [x] Encrypt
+  - [ ] Decrypt
 - [ ] TextSteganography.java
+  - [ ] Encrypt
+  - [ ] Decrypt
 
 ### Challenge
 
