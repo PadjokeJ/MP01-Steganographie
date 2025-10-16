@@ -201,7 +201,19 @@ public final class Image {
      * @return <b>black and white ARGB</b> representation
      */
     public static int[][] fromBinary(boolean[][] image){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image != null;
+
+        int[][] pixels = new int[image.length][image[0].length];
+        for (int x = 0; x < image.length; x++) {
+            for (int y = 0; y < image.length; y++) {
+                int color = 0xFF000000;
+                if (image[x][y]) {
+                    color = 0xFFFFFFFF;
+                }
+                pixels[x][y] = color;
+            }
+        }
+        return pixels;
     }
 
 }
