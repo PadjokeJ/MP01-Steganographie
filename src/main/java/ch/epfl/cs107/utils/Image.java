@@ -164,7 +164,15 @@ public final class Image {
      * @return binary representation of the image
      */
     public static boolean[][] toBinary(int[][] image, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image != null;
+
+        boolean[][] binary = new boolean[image.length][image[0].length];
+        for (int x = 0; x < image.length; x++) {
+            for (int y = 0; y < image[x].length; y++) {
+                binary = Image.binary(image[x][y]);
+            }
+        }
+        return binary;
     }
 
     /**
