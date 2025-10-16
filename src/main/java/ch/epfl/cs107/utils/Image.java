@@ -37,7 +37,33 @@ public final class Image {
      * @return packed value of the pixel
      */
     public static int argb(byte alpha, byte red, byte green, byte blue){
-        return Helper.fail("NOT IMPLEMENTED");
+        int color = 0;
+
+        int mask = 0xFF;
+        mask &= (int) blue;
+        color |= mask;
+        
+        mask = 0xFF;
+        mask &= (int) green;
+        color |= mask << 8;
+
+        mask = 0xFF;
+        mask &= (int) red;
+        color |= mask << 16;
+
+        mask = 0xFF;
+        mask &= (int) alpha;
+        color |= mask << 24;
+
+        return color;
+    }
+
+    static byte maskedColor(int pixel, int shift) {
+        int mask = 0xFF << shift;
+        int color = pixel & mask;
+        color = color >>> shift;
+
+        return (byte) color;
     }
 
     /**
@@ -47,7 +73,7 @@ public final class Image {
      * @return the alpha component of the pixel
      */
     public static byte alpha(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return maskedColor(pixel, 24);
     }
 
     /**
@@ -57,7 +83,7 @@ public final class Image {
      * @return the red component of the pixel
      */
     public static byte red(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+       return maskedColor(pixel, 16); 
     }
 
     /**
@@ -67,7 +93,7 @@ public final class Image {
      * @return the green component of the pixel
      */
     public static byte green(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return maskedColor(pixel, 8);
     }
 
     /**
@@ -77,7 +103,7 @@ public final class Image {
      * @return the blue component of the pixel
      */
     public static byte blue(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return maskedColor(pixel, 0);
     }
 
     /**
@@ -87,7 +113,14 @@ public final class Image {
      * @return gray scaling of the given pixel
      */
     public static int gray(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        int gray = 0;
+        gray += ((int) Image.red(pixel)) & 0xFF;
+        gray += ((int) Image.green(pixel)) & 0xFF;
+        gray += ((int) Image.blue(pixel)) & 0xFF;
+
+        gray /= 3;
+        
+        return gray;
     }
 
     /**
@@ -98,7 +131,7 @@ public final class Image {
      * @return binary representation of a pixel
      */
     public static boolean binary(int gray, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        return gray >= threshold;
     }
 
     // ============================================================================================
@@ -112,7 +145,15 @@ public final class Image {
      * @return the gray scale version of the image
      */
     public static int[][] toGray(int[][] image){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image != null;
+
+        int[][] grayscale = new int[image.length][image[0].length];
+        for (int x = 0; x < image.length; x++) {
+            for (int y = 0; y < image[x].length; y++) {
+                grayscale[x][y] = Image.gray(image[x][y]);
+            }
+        }
+        return grayscale;
     }
 
     /**
@@ -123,7 +164,15 @@ public final class Image {
      * @return binary representation of the image
      */
     public static boolean[][] toBinary(int[][] image, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image != null;
+
+        boolean[][] binary = new boolean[image.length][image[0].length];
+        for (int x = 0; x < image.length; x++) {
+            for (int y = 0; y < image[x].length; y++) {
+                binary[x][y] = Image.binary(image[x][y], threshold);
+            }
+        }
+        return binary;
     }
 
     /**
@@ -133,7 +182,16 @@ public final class Image {
      * @return <b>gray ARGB</b> representation
      */
     public static int[][] fromGray(int[][] image){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image != null;
+
+        int[][] pixels = new int[image.length][image[0].length];
+        for (int x = 0; x < image.length; x++) {
+            for (int y = 0; y < image[0].length; y++) {
+                byte gray = (byte) image[x][y];
+                pixels[x][y] = Image.argb((byte) 0xFF, gray, gray, gray);
+            }
+        }
+        return pixels;
     }
 
     /**
