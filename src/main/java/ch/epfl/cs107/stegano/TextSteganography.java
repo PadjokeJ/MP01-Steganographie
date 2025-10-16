@@ -34,7 +34,24 @@ public class TextSteganography {
      * @return ARGB image with the message embedded
      */
     public static int[][] embedBitArray(int[][] cover, boolean[] message) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert cover != null;
+        assert message != null;
+
+        assert cover.length > 0 && cover[0].length > 0;
+        
+        int image[][] = new int[cover.length][cover[0].length];
+        
+        int maxEmbed = cover.length * cover[0].length;
+        if (message.length <= maxEmbed) 
+            maxEmbed = message.length;
+
+        for (int i = 0; i < maxEmbed; i++) {
+            int x = i % cover.length;
+            int y = i / cover.length;
+            image[x][y] = embedInLSB(cover[x][y], message[i]);
+        }
+
+        return image;
     }
 
     /**
@@ -43,7 +60,21 @@ public class TextSteganography {
      * @return extracted message
      */
     public static boolean[] revealBitArray(int[][] image) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image != null;
+
+        int xLen = image.length;
+        int yLen = image[0].length;
+        assert xLen > 0 && yLen > 0;
+
+        boolean[] message = new boolean[xLen * yLen];
+
+        for (int x = 0; x < xLen; x++) {
+            for (int y = 0; y < yLen; y++) {
+                message[x * xLen + y] = getLSB(image[x][y]);
+            }
+        }
+
+        return message;
     }
 
 
@@ -59,7 +90,11 @@ public class TextSteganography {
      * @return ARGB image with the message embedded
      */
     public static int[][] embedText(int[][] cover, byte[] message) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert message != null;
+        assert message.length > 0;
+
+        boolean[] bits = bytesToBits(message);
+        return embedBitArray(cover, bits);
     }
 
     /**
@@ -68,7 +103,12 @@ public class TextSteganography {
      * @return extracted message
      */
     public static byte[] revealText(int[][] image) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert image != null;
+        assert image.length > 0;
+        assert image[0].length > 0;
+
+        boolean[] bits = revealBitArray(image);
+        return bitsToBytes(bits);
     }
 
 }

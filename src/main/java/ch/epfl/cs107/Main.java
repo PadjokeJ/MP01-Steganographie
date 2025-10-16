@@ -81,7 +81,7 @@ public final class Main {
         assert testEmbedBWImage();
         //assert testEmbedText();
         assert testImageSteganographyWithImages("the-starry-night");
-        //assert testRevealBitArray();
+        assert testRevealBitArray();
         Helper.dialog("Tests ", "ImageSteganography passed");
     }
 
