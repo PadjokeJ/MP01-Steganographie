@@ -355,13 +355,9 @@ public final class Main {
         Helper.show(hidden, "hidden");
         var steg = ImageSteganography.embedARGB(cover, image, IMAGE_THRESHOLD);
         Helper.show(steg, "steg");
-        for (int x = 0; x < steg.length; x++) {
-            for (int y = 0; y < steg[0].length; y++) {
-                if (steg[x][y] != hidden[x][y]) 
-                    System.out.println(x + ", " + y + " : " + (hidden[x][y] - steg[x][y]));
-            }
-        }
-        return Arrays.deepEquals(ImageSteganography.embedARGB(cover, image, IMAGE_THRESHOLD), hidden);
+
+        boolean condition = Arrays.deepEquals(steg, hidden);
+        return condition;
     }
 
     private static boolean testRevealBitArray() {
