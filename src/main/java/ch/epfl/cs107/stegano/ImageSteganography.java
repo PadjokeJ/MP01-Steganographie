@@ -35,7 +35,15 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedARGB(int[][] cover, int[][] argbImage, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert argbImage != null;
+        assert cover != null;
+
+        int[][] image;
+        int[][] grayImage;
+        grayImage = toGray(argbImage);
+        
+        image = embedGray(cover, grayImage, threshold);
+        return image;
     }
 
     /**
@@ -46,7 +54,15 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedGray(int[][] cover, int[][] grayImage, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert grayImage != null;
+        assert cover != null;
+
+        int[][] image;
+        boolean[][] bwImage;
+        bwImage = toBinary(grayImage, threshold);
+
+        image = embedBW(cover, bwImage);
+        return image;
     }
 
     /**
@@ -56,7 +72,22 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedBW(int[][] cover, boolean[][] load){
-        return Helper.fail("NOT IMPLEMENTED");
+        assert load != null;
+        assert cover != null;
+        assert (cover.length >= load.length) && (cover[0].length >= load[0].length);
+
+        int[][] image = new int[cover.length][cover[0].length];
+        
+        for (int x = 0; x < cover.length; x++) {
+            for (int y = 0; y < cover[x].length; y++) {
+                if (x < load.length && y < load[0].length)
+                    image[x][y] = embedInLSB(cover[x][y], load[x][y]);
+                else
+                    image[x][y] = cover[x][y];
+            }
+        }
+
+        return image;
     }
 
     // ============================================================================================

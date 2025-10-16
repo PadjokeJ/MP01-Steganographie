@@ -78,9 +78,9 @@ public final class Main {
         //testCrypto(message, key);
         Helper.dialog("Tests ", "Cryptography passed");
         // ========== Test Steganography Methods ==========
-        //assert testEmbedBWImage();
+        assert testEmbedBWImage();
         //assert testEmbedText();
-        //assert testImageSteganographyWithImages("the-starry-night");
+        assert testImageSteganographyWithImages("the-starry-night");
         //assert testRevealBitArray();
         Helper.dialog("Tests ", "ImageSteganography passed");
     }
@@ -348,8 +348,19 @@ public final class Main {
 
     private static boolean testImageSteganographyWithImages(String path){
         var image  = Helper.readImage(path + File.separator + "image.png");
+        //Helper.show(image, "image");
         var cover  = Helper.readImage(path + File.separator + "cover.png");
+        //Helper.show(cover, "cover");
         var hidden = Helper.readImage(path + File.separator + "hidden.png");
+        Helper.show(hidden, "hidden");
+        var steg = ImageSteganography.embedARGB(cover, image, IMAGE_THRESHOLD);
+        Helper.show(steg, "steg");
+        for (int x = 0; x < steg.length; x++) {
+            for (int y = 0; y < steg[0].length; y++) {
+                if (steg[x][y] != hidden[x][y]) 
+                    System.out.println(x + ", " + y + " : " + (hidden[x][y] - steg[x][y]));
+            }
+        }
         return Arrays.deepEquals(ImageSteganography.embedARGB(cover, image, IMAGE_THRESHOLD), hidden);
     }
 
