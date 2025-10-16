@@ -14,7 +14,7 @@ import static ch.epfl.cs107.Main.*;
 /**
  * <b>Task 3.1: </b>Utility class to perform Image Steganography
  *
- * @author Hamza REMMAL (hamza.remmal@epfl.ch)
+ * @author Jonatan Pfister (jonatan.pfister@epfl.ch)
  * @version 1.0.0
  * @since 1.0.0
  */
