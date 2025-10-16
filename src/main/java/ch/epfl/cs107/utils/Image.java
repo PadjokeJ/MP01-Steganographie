@@ -37,7 +37,33 @@ public final class Image {
      * @return packed value of the pixel
      */
     public static int argb(byte alpha, byte red, byte green, byte blue){
-        return Helper.fail("NOT IMPLEMENTED");
+        int color = 0;
+
+        int mask = 0xFF;
+        mask &= (int) blue;
+        color |= mask;
+        
+        mask = 0xFF;
+        mask &= (int) green;
+        color |= mask << 8;
+
+        mask = 0xFF;
+        mask &= (int) red;
+        color |= mask << 16;
+
+        mask = 0xFF;
+        mask &= (int) alpha;
+        color |= mask << 24;
+
+        return color;
+    }
+
+    static byte maskedColor(int pixel, int shift) {
+        int mask = 0xFF << shift;
+        int color = pixel & mask;
+        color = color >>> shift;
+
+        return (byte) color;
     }
 
     /**
@@ -47,7 +73,7 @@ public final class Image {
      * @return the alpha component of the pixel
      */
     public static byte alpha(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return maskedColor(pixel, 24);
     }
 
     /**
@@ -57,7 +83,7 @@ public final class Image {
      * @return the red component of the pixel
      */
     public static byte red(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+       return maskedColor(pixel, 16); 
     }
 
     /**
@@ -67,7 +93,7 @@ public final class Image {
      * @return the green component of the pixel
      */
     public static byte green(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return maskedColor(pixel, 8);
     }
 
     /**
@@ -77,7 +103,7 @@ public final class Image {
      * @return the blue component of the pixel
      */
     public static byte blue(int pixel){
-        return Helper.fail("NOT IMPLEMENTED");
+        return maskedColor(pixel, 0);
     }
 
     /**
