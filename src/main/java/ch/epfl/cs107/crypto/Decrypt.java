@@ -38,9 +38,9 @@ public final class Decrypt {
         byte[] bytes = new byte[cipher.length];
         for(int i=0;i<cipher.length;i++){
             if(cipher[i]+key<-128){
-                bytes[i]= (byte) (cipher[i]+key+255);
-            }if(cipher[i]+key>-128){
-                bytes[i]= (byte) (cipher[i]+key);
+                bytes[i]= (byte) (cipher[i]-key+255);
+            }if(cipher[i]+key>=-128){
+                bytes[i]= (byte) (cipher[i]-key);
             }
         return bytes;
     }

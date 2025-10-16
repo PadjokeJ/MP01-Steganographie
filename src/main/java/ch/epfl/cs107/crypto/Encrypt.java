@@ -40,7 +40,7 @@ public final class Encrypt {
         for(int i=0;i<plainText.length;i++){
             if(plainText[i]+key>127){
                 bytes[i]= (byte) (plainText[i]+key-255);
-            }if(plainText[i]+key<127){
+            }if(plainText[i]+key<=127){
                 bytes[i]= (byte) (plainText[i]+key);
             }
         }
