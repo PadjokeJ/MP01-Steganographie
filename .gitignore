@@ -24,3 +24,8 @@ hs_err_pid*
 replay_pid*
 
 target/
+
+/shelf/
+/workspace.xml
+
+.idea/
