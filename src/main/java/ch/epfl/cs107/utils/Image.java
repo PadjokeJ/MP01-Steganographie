@@ -131,7 +131,7 @@ public final class Image {
      * @return binary representation of a pixel
      */
     public static boolean binary(int gray, int threshold){
-        return Helper.fail("NOT IMPLEMENTED");
+        return gray >= threshold;
     }
 
     // ============================================================================================
