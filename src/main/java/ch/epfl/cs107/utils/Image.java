@@ -187,7 +187,7 @@ public final class Image {
         int[][] pixels = new int[image.length][image[0].length];
         for (int x = 0; x < image.length; x++) {
             for (int y = 0; y < image[0].length; y++) {
-                byte gray = (byte) pixels[x][y];
+                byte gray = (byte) image[x][y];
                 pixels[x][y] = Image.argb((byte) 0xFF, gray, gray, gray);
             }
         }
