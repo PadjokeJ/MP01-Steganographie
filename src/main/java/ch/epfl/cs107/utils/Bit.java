@@ -102,7 +102,7 @@ public final class Bit {
     public static boolean[] toBitArray(byte value){
         boolean[] bools = new boolean[8];
         for (int i = 0; i < 8; i++) {
-            bools[i] = Bit.getXthBit((int) value, i);
+            bools[i] = Bit.getXthBit((int) value, 7 - i);
         }
         return bools;
     }
@@ -128,10 +128,10 @@ public final class Bit {
         byte result = 0;
         for (int i = 0; i < 8; i++) {
             if (bitArray[i]) {
-                result |= mask << i;
+                result |= mask << (7 - i);
             }
         }
-        return result;
+        return (byte) result;
     }
 
 }
