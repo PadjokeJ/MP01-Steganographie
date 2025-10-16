@@ -169,7 +169,7 @@ public final class Image {
         boolean[][] binary = new boolean[image.length][image[0].length];
         for (int x = 0; x < image.length; x++) {
             for (int y = 0; y < image[x].length; y++) {
-                binary[x][y] = Image.binary(image[x][y]);
+                binary[x][y] = Image.binary(image[x][y], threshold);
             }
         }
         return binary;
@@ -187,8 +187,8 @@ public final class Image {
         int[][] pixels = new int[image.length][image[0].length];
         for (int x = 0; x < image.length; x++) {
             for (int y = 0; y < image[0].length; y++) {
-                int gray = pixels[x][y];
-                pixels[x][y] = Image.argb(0xFF, gray, gray, gray);
+                byte gray = (byte) pixels[x][y];
+                pixels[x][y] = Image.argb((byte) 0xFF, gray, gray, gray);
             }
         }
         return pixels;
