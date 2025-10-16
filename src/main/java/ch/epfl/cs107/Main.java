@@ -206,7 +206,6 @@ public final class Main {
     private static boolean testImageFromGray() {
         int[][] grayImage = {{159, 52}, {255, 0}}; // {{0xf9, 0x34}, {0xff, 0x00}}
         int[][] computed = Image.fromGray(grayImage);
-        System.out.println(Arrays.toString(computed[0]));
         int[][] expected = {{0xff9f9f9f, 0xff343434}, {0xffffffff, 0xff000000}};
         return Arrays.deepEquals(computed, expected);
     }
