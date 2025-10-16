@@ -36,12 +36,14 @@ public final class Decrypt {
      */
     public static byte[] caesar(byte[] cipher, byte key) {
         byte[] bytes = new byte[cipher.length];
-        for(int i=0;i<cipher.length;i++){
-            if(cipher[i]+key<-128){
-                bytes[i]= (byte) (cipher[i]-key+255);
-            }if(cipher[i]+key>=-128){
-                bytes[i]= (byte) (cipher[i]-key);
+        for(int i=0;i<cipher.length;i++) {
+            if (cipher[i] + key < -128) {
+                bytes[i] = (byte) (cipher[i] - key + 255);
             }
+            if (cipher[i] + key >= -128) {
+                bytes[i] = (byte) (cipher[i] - key);
+            }
+        }
         return bytes;
     }
 
