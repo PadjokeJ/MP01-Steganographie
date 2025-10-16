@@ -50,11 +50,11 @@ public final class Main {
      */
     public static void main(String[] args) {
         // ========== Test Bit ==========
-        //assert testXthBit();
-        //assert testGetLSB();
-        //assert testEmbedInXthBit();
-        //assert testEmbedInLSB();
-        //assert testByteConversion();
+        assert testXthBit();
+        assert testGetLSB();
+        assert testEmbedInXthBit();
+        assert testEmbedInLSB();
+        assert testByteConversion();
         // ========== Test Text ==========
         //assert testToBitArray();
         Helper.dialog("Tests", "Bit and Text manipulation passed");
