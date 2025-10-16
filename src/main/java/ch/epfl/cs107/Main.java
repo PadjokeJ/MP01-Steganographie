@@ -67,8 +67,8 @@ public final class Main {
         assert testImageFromGray();
         assert testImageFromBinary();
         Helper.dialog("Tests ", "Image manipulation passed");
-        //assert testWithRealImage("image-formats");
-        //assert testBinaryWithRealImage("image-formats");
+        assert testWithRealImage("image-formats");
+        assert testBinaryWithRealImage("image-formats");
         Helper.dialog("Tests ", "Image manipulation with images from 'image-formats' passed");
         // ========== Test Cryptography Methods ==========
         String message = "La vie est un long fleuve tranquille :-)";
@@ -219,9 +219,10 @@ public final class Main {
 
     private static boolean testWithRealImage(String path){
         var coloured = Helper.readImage(path + File.separator + "argb.png");
-        Helper.show(coloured, "ARGB for " + path);
         var grayscaled = Helper.readImage(path + File.separator + "gray.png");
         Helper.show(grayscaled, "Gray for " + path);
+        var manipulated = Image.fromGray(Image.toGray(coloured));
+        Helper.show(manipulated, "maniped image");
         return Arrays.deepEquals(Image.fromGray(Image.toGray(coloured)), grayscaled);
     }
 
