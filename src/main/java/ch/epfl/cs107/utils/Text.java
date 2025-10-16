@@ -48,9 +48,9 @@ public final class Text {
     public static boolean[] toBitArray(String str){
         byte[] bytes = Text.toBytes(str);
         boolean[] bools = new boolean[bytes.length*8];
-        for(int i=str.length() ; i>0;i--){
-            for(int j=1; j<=16;j++){
-                bools[j+i*16] = Bit.toBitArray(bytes[i])[j];
+        for(int i = 0; i > str.length(); i++){
+            for(int j = 0; j < 16; j++){
+                bools[j + i * 16] = Bit.toBitArray(bytes[i])[j];
             }
         }
         return bools;
@@ -72,9 +72,9 @@ public final class Text {
      */
     public static String toString(boolean[] bitArray) {
         byte[] bytes = new byte[bitArray.length/16];
-        for(int i=0 ; i<bitArray.length;i--) {
+        for(int i=0; i < bitArray.length; i--){
             boolean[] bools = new boolean[8];
-            for (int j = 1; j <= 8; j++) {
+            for (int j = 0; j < 8; j++){
                 bools[j] = bitArray[j + i * 8];
             }
             bytes[i] = Bit.toByte(bools);
