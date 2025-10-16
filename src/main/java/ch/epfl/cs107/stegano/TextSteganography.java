@@ -93,7 +93,14 @@ public class TextSteganography {
         assert message != null;
         assert message.length > 0;
 
-        boolean[] bits = bytesToBits(message);
+        boolean[] bits = new boolean[message.length * 8];
+        for (int i = 0; i < message.length; i++) {
+            boolean[] bitArray = toBitArray(message[i]);
+            for (int j = 0; j < 8; j++) {
+                bits[i * 8 + j] = bitArray[j];
+            }
+        }
+       
         return embedBitArray(cover, bits);
     }
 
@@ -108,7 +115,15 @@ public class TextSteganography {
         assert image[0].length > 0;
 
         boolean[] bits = revealBitArray(image);
-        return bitsToBytes(bits);
+        byte[] bytes = new byte[bits.length / 8];
+        for (int i = 0; i < bytes.length; i++) {
+            boolean[] bitArray = new boolean[8];
+            for (int j = 0; j < 8; j++) {
+                bitArray[j] = bits[8 * i + j];
+            }
+            bytes[i] = toByte(bitArray);
+        }
+        return bytes;
     }
 
 }
