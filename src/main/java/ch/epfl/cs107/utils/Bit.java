@@ -124,7 +124,14 @@ public final class Bit {
      * @return the byte representation of the bit array
      */
     public static byte toByte(boolean[] bitArray){
-        return Helper.fail("NOT IMPLEMENTED");
+        byte mask = 1;
+        byte result = 0;
+        for (int i = 0; i < 8; i++) {
+            if (bitArray[i]) {
+                result |= mask << i;
+            }
+        }
+        return result;
     }
 
 }
