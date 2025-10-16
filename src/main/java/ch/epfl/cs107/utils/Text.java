@@ -46,7 +46,14 @@ public final class Text {
      * @return <b>UTF-8</b> representation of the string in the <b>bit array</b> format
      */
     public static boolean[] toBitArray(String str){
-        return Helper.fail("NOT IMPLEMENTED");
+        byte[] bytes = Text.toBytes(str);
+        boolean[] bools = new boolean[bytes.length*8];
+        for(int i=str.length() ; i>0;i--){
+            for(int j=1; j<=16;j++){
+                bools[j+i*16] = Bit.toBitArray(bytes[i])[j];
+            }
+        }
+        return bools;
     }
 
     /**
@@ -64,7 +71,14 @@ public final class Text {
      * @return <b>UTF-8 String</b> representation of the bit array
      */
     public static String toString(boolean[] bitArray) {
-        return Helper.fail("NOT IMPLEMENTED");
+        byte[] bytes = new byte[bitArray.length/16];
+        for(int i=0 ; i<bitArray.length;i--) {
+            boolean[] bools = new boolean[8];
+            for (int j = 1; j <= 8; j++) {
+                bools[j] = bitArray[j + i * 8];
+            }
+            bytes[i] = Bit.toByte(bools);
+        }
+        return Text.toString(bytes);
     }
-
 }
