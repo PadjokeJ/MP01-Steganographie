@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9e37c23-b7a4-4439-8493-963da2286cc9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/epfl/cs107/crypto/Decrypt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/epfl/cs107/crypto/Decrypt.java" afterDir="false" />
-    </list>
+    <list default="true" id="f9e37c23-b7a4-4439-8493-963da2286cc9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
