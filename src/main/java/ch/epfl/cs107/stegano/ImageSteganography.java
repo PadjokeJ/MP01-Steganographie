@@ -85,11 +85,16 @@ public final class ImageSteganography {
     public static int[][] embedBW(int[][] cover, boolean[][] load){
         assert load != null;
         assert cover != null;
-        assert (cover.length >= load.length) && (cover[0].length >= load[0].length);
+
         assert !containsNullLines(cover);
+        
+        assert load[0] != null;
 
         assert cover.length > 0 && cover[0].length > 0;
         assert load.length > 0 && load[0].length > 0;
+
+        assert (cover.length >= load.length) && (cover[0].length >= load[0].length);
+
 
         int[][] image = new int[cover.length][cover[0].length];
         
@@ -117,6 +122,9 @@ public final class ImageSteganography {
     public static boolean[][] revealBW(int[][] image) {
         assert image != null;
         assert !containsNullLines(image);
+
+        assert image.length > 0;
+        assert image[0].length > 0;
 
         boolean[][] bwImage = new boolean[image.length][image[0].length];
 
