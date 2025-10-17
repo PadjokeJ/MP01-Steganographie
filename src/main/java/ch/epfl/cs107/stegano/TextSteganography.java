@@ -43,6 +43,12 @@ public class TextSteganography {
 
         int image[][] = new int[cover.length][cover[0].length];
         
+        for (int i = 0; i < cover.length; i++) {
+            for (int j = 0; j < cover[j].length; j++) {
+                image[i][j] = cover[i][j];
+            }
+        }
+
         int maxEmbed = cover.length * cover[0].length;
         if (message.length <= maxEmbed) 
             maxEmbed = message.length;
@@ -69,13 +75,12 @@ public class TextSteganography {
 
         int xLen = image.length;
         int yLen = image[0].length;
-        assert xLen > 0 && yLen > 0;
 
         boolean[] message = new boolean[xLen * yLen * 8];
 
-        for (int x = 0; x < xLen; x++) {
-            for (int y = 0; y < yLen; y++) {
-                message[x * xLen + y] = getLSB(image[x][y]);
+        for (int y = 0; y < yLen; y++) {
+            for (int x = 0; x < xLen; x++) {
+                message[y * yLen + x] = getLSB(image[x][y]);
             }
         }
 
