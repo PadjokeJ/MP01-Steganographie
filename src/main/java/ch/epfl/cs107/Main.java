@@ -79,7 +79,7 @@ public final class Main {
         Helper.dialog("Tests ", "Cryptography passed");
         // ========== Test Steganography Methods ==========
         assert testEmbedBWImage();
-        //assert testEmbedText();
+        assert testEmbedText();
         assert testImageSteganographyWithImages("the-starry-night");
         assert testRevealBitArray();
         Helper.dialog("Tests ", "ImageSteganography passed");
@@ -337,12 +337,22 @@ public final class Main {
     private static boolean testEmbedText() {
         final byte[] TEXT = Text.toBytes("$\\|");
         int[][] cover = new int[10][10]; // filled with 0
-        final int[][] EXPECTED_IMAGE = {{0, 0, 1, 0, 0, 1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0, 0, 0, 1, 1, 1}, {1, 1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }};
+        final int[][] EXPECTED_IMAGE = {
+            {0, 0, 1, 0, 0, 1, 0, 0, 0, 1},
+            {0, 1, 1, 1, 0, 0, 0, 1, 1, 1}, 
+            {1, 1, 0, 0, 0, 0, 0, 0, 0, 0}, 
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+        };
 
         int[][] hidden = TextSteganography.embedText(cover, TEXT);
+        for (int i = 0; i < 10; i++)
+            System.out.println(Arrays.toString(hidden[i]));
         return Arrays.deepEquals(EXPECTED_IMAGE, hidden) && Arrays.deepEquals(cover, new int[10][10]);
     }
 
