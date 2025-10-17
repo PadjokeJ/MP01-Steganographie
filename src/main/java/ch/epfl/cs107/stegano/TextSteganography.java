@@ -48,7 +48,7 @@ public class TextSteganography {
         for (int i = 0; i < maxEmbed; i++) {
             int x = i % cover.length;
             int y = i / cover.length;
-            image[x][y] = embedInLSB(cover[x][y], message[i]);
+            image[y][x] = embedInLSB(cover[y][x], message[i]);
         }
 
         return image;
@@ -70,7 +70,7 @@ public class TextSteganography {
 
         for (int x = 0; x < xLen; x++) {
             for (int y = 0; y < yLen; y++) {
-                message[x * xLen + y] = getLSB(image[x][y]);
+                message[x * xLen + y] = getLSB(image[y][x]);
             }
         }
 
