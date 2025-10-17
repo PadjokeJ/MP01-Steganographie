@@ -152,10 +152,10 @@ public final class Encrypt {
         assert plainText.length >=1;
         assert pad != null;
         assert pad.length >=1;
+        assert pad.length==plainText.length;
         byte[] bytes = new byte[plainText.length];
         for (int i =0; i<plainText.length;i++){
-            int pos = i % pad.length;
-            bytes[i]=(byte)(plainText[i]^pad[pos]);
+            bytes[i]=(byte)(plainText[i]^pad[i]);
         }
         return bytes;
     }
