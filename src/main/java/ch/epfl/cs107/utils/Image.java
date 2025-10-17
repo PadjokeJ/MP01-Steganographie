@@ -150,6 +150,11 @@ public final class Image {
     public static int[][] toGray(int[][] image){
         assert image != null;
 
+        if (image.length == 0)
+            return image;
+        if (image[0].length == 0)
+            return image;
+
         int[][] grayscale = new int[image.length][image[0].length];
         for (int x = 0; x < image.length; x++) {
             for (int y = 0; y < image[x].length; y++) {
@@ -172,13 +177,11 @@ public final class Image {
         for (int[] line: image) {
             assert line != null;
         }
-
-        if (image.length == 0)
-            return image;
-
-
-
-        boolean[][] binary = new boolean[image.length][image[0].length];
+        boolean[][] binary; 
+        if (image.length != 0)
+            binary = new boolean[image.length][image[0].length];
+        else
+            binary = new boolean[image.length][0];
         for (int x = 0; x < image.length; x++) {
             for (int y = 0; y < image[x].length; y++) {
                 binary[x][y] = Image.binary(image[x][y], threshold);
@@ -220,16 +223,13 @@ public final class Image {
      */
     public static int[][] fromBinary(boolean[][] image){
         assert image != null;
-        for (int[] line: image) {
+        for (boolean[] line: image) {
             assert line != null;
         }
-
-        if (image.length == 0)
-            return image;
-
-       
-
-        int[][] pixels = new int[image.length][image[0].length];
+        int scndL = 0;
+        if (image.length != 0)
+            scndL = image[0].length;
+        int[][] pixels = new int[image.length][scndL];
         for (int x = 0; x < image.length; x++) {
             for (int y = 0; y < image.length; y++) {
                 int color = 0xFF000000;

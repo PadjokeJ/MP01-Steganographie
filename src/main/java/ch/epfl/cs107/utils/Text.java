@@ -17,7 +17,7 @@ import static ch.epfl.cs107.Main.*;
 /**
  * <b>Task 1.2: </b>Utility class to manipulate texts ({@link String}) objects.
  *
- * @author Hamza REMMAL (hamza.remmal@epfl.ch)
+ * @author Arthur Delémont (arthur.delemont@epfl.ch)
  * @version 1.0.0
  * @since 1.0.0
  */
@@ -36,6 +36,7 @@ public final class Text {
      * @return bytes representation of the String in the <b>UTF-8</b> format
      */
     public static byte[] toBytes(String str){
+        assert str != null;
         return str.getBytes(StandardCharsets.UTF_8);
     }
 
@@ -46,6 +47,8 @@ public final class Text {
      * @return <b>UTF-8</b> representation of the string in the <b>bit array</b> format
      */
     public static boolean[] toBitArray(String str){
+        assert str != null;
+        assert str.length() > 0;
         byte[] bytes = Text.toBytes(str);
         boolean[] bools = new boolean[bytes.length*8];
         for(int i = 0; i < bytes.length; i++){
@@ -62,6 +65,8 @@ public final class Text {
      * @return String representation using the {@link String} type
      */
     public static String toString(byte[] bytes) {
+        assert bytes != null;
+        assert bytes.length > 0;
         return new String(bytes, StandardCharsets.UTF_8);
     }
 
@@ -71,7 +76,10 @@ public final class Text {
      * @return <b>UTF-8 String</b> representation of the bit array
      */
     public static String toString(boolean[] bitArray) {
-        byte[] bytes = new byte[bitArray.length/16];
+        assert bitArray != null;
+        assert bitArray.length > 0;
+
+        byte[] bytes = new byte[bitArray.length / 8];
         for(int i=0; i < bitArray.length; i--){
             boolean[] bools = new boolean[8];
             for (int j = 0; j < 8; j++){
