@@ -130,7 +130,8 @@ public final class Bit {
      * @return the byte representation of the bit array
      */
     public static byte toByte(boolean[] bitArray){
-        assert bitArray.length <= 8;
+        assert bitArray != null;
+        assert bitArray.length == 8;
 
         byte mask = 1;
         byte result = 0;
