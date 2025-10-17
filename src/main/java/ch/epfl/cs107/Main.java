@@ -374,6 +374,10 @@ public final class Main {
         var image = new int[][]{{914510701, -1532355920}, {-472952826, 483441963}};
         var expected = new boolean[]{true, false, false, true};
         var actual = TextSteganography.revealBitArray(image);
+        
+        for (int i = 0; i < 4; i++) {
+            System.out.println(expected[i] == actual[i]);
+        }
 
         return Arrays.equals(expected, actual);
     }
