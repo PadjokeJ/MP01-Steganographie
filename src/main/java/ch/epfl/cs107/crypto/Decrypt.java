@@ -86,7 +86,25 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] cbc(byte[] cipher, byte[] iv) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert cipher != null;
+        assert cipher.length >=1;
+        byte[] bytes = new byte[cipher.length];
+        for(int i=cipher.length/iv.length;i>=0;i--){
+            if(i==cipher.length/iv.length){
+                for (int j=0;j<cipher.length%iv.length;j++){
+                    bytes[j + i * iv.length] = (byte) (cipher[j + i * iv.length] ^ cipher[j + (i-1) * iv.length]);
+                }
+            }if(i==0){
+                for (int j=0;j<iv.length;j++) {
+                    bytes[j + i * iv.length] = (byte) (cipher[j + i * iv.length] ^ iv[j]);
+                }
+            }if(0 < i && i < cipher.length/iv.length){
+                for (int j=0;j<iv.length;j++){
+                    bytes[j + i * iv.length] = (byte) (cipher[j + i * iv.length] ^ cipher[j + (i-1) * iv.length]);
+                }
+            }
+        }
+        return bytes;
     }
 
     // ============================================================================================
