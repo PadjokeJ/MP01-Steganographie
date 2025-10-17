@@ -152,6 +152,11 @@ public final class Image {
 
         if (image.length == 0)
             return image;
+        
+        for (int[] l: image) {
+            assert l != null;
+        }
+
         if (image[0].length == 0)
             return image;
 
