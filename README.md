@@ -4,16 +4,18 @@ MP 01 de CS107, rédigé par Arthur Delémont et Jonatan Pfister
 
 ## Checklist
 
+100/100
+
 ### utils
 
 - [x] Bit.java
-- [ ] Text.java
+- [x] Text.java
 - [x] Image.java
 
 ### crypto
 
-- [ ] Decrypt.java
-- [ ] Encrypt.java
+- [x] Decrypt.java
+- [x] Encrypt.java
 
 ### stegano
 
@@ -26,4 +28,4 @@ MP 01 de CS107, rédigé par Arthur Delémont et Jonatan Pfister
 
 ### Challenge
 
-- [ ] Challenge.java
+- [x] Challenge.java
