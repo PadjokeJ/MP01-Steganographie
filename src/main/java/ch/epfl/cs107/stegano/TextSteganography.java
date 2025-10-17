@@ -71,11 +71,11 @@ public class TextSteganography {
         int yLen = image[0].length;
         assert xLen > 0 && yLen > 0;
 
-        boolean[] message = new boolean[xLen * yLen];
+        boolean[] message = new boolean[xLen * yLen * 8];
 
         for (int x = 0; x < xLen; x++) {
             for (int y = 0; y < yLen; y++) {
-                message[x * xLen + y] = getLSB(image[y][x]);
+                message[x * xLen + y] = getLSB(image[x][y]);
             }
         }
 

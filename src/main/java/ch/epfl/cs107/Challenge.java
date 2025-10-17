@@ -3,6 +3,7 @@ package ch.epfl.cs107;
 import ch.epfl.cs107.crypto.Decrypt;
 import ch.epfl.cs107.crypto.Encrypt;
 import ch.epfl.cs107.utils.Text;
+import ch.epfl.cs107.stegano.TextSteganography;
 
 import java.nio.charset.StandardCharsets;
 
@@ -52,7 +53,22 @@ public class Challenge {
 
         /* We find a keyword and a IV position */
         /* Let's decrypt images */
+        int[][] image1 = Helper.readImage("challenge/image1.png");
+        byte[] textimage1 = TextSteganography.revealText(image1);
+        byte[] image1decrypted = Decrypt.vigenere(textimage1, Text.toBytes("c4Ptur37hEfl46"));
+        System.out.println(Text.toString(image1decrypted).substring(120, 136));
+        
+        byte[] posBytes = new byte[16];
+        for (int i = 0; i < 16; i++) {
+            int k = 120 + i;
+            posBytes[i] = image1decrypted[i];
+        }
 
+        int[][] image2 = Helper.readImage("challenge/image2.png");
+        byte[] textimage2 = TextSteganography.revealText(image2);
+        
+        byte[] image2decrypted = Decrypt.cbc(image1decrypted, posBytes);
+        System.out.println(Text.toString(image2decrypted).substring(0, 1000));
 
         return "";
     }
