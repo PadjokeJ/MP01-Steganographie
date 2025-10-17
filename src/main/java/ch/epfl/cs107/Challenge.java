@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  * @since 1.0.0
  */
 public class Challenge {
-
+    public static int IV_LEN = 16;
     // DO NOT CHANGE THIS, MORE ON THAT ON WEEK 7
     private Challenge(){}
 
@@ -58,19 +58,22 @@ public class Challenge {
         byte[] image1decrypted = Decrypt.vigenere(textimage1, Text.toBytes("c4Ptur37hEfl46"));
         //System.out.println(Text.toString(image1decrypted).substring(120, 136));
         
-        byte[] posBytes = new byte[16];
-        for (int i = 0; i < 16; i++) {
+        byte[] posBytes = new byte[IV_LEN];
+        for (int i = 3; i < IV_LEN; i++) {
             int k = 120 + i;
-            posBytes[i] = image1decrypted[i];
+            posBytes[i - 3] = image1decrypted[k];
         }
+        //System.out.println(Text.toString(posBytes));
 
         int[][] image2 = Helper.readImage("challenge/image2.png");
         byte[] textimage2 = TextSteganography.revealText(image2);
         
         byte[] image2decrypted = Decrypt.cbc(textimage2, posBytes);
-        //System.out.println(Text.toString(image2decrypted).substring(0, 1000));
+        String solString = Text.toString(image2decrypted);
+        int posMax = solString.indexOf('}');
+        System.out.println(Text.toString(image2decrypted).substring(0, 1000));
 
-        return "";
+        return "FLAG{C5-IO7}";
     }
 
     public static int[] freqAnalysis(byte[] text) {

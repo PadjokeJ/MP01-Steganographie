@@ -74,27 +74,37 @@ public final class ImageSteganography {
      * @return ARGB image with the image embedded on the cover
      */
     public static int[][] embedGray(int[][] cover, int[][] grayImage, int threshold){
+        try {
         assert grayImage != null;
         assert cover != null;
         assert !containsNullLines(grayImage);
         assert isRectangular(grayImage);
         assert cover.length > 0;
         assert grayImage.length > 0;
-        
+        } catch (Exception e) {
+        assert false;
+        }
         
         // is valid gray
         for (int[] line: grayImage) {
+            assert line.length == grayImage[0].length;
             for (int pixel: line) {
                 assert pixel >= 0 && pixel <= 255;
             }
         }
-
+        try {
         int[][] image;
         boolean[][] bwImage;
         bwImage = toBinary(grayImage, threshold);
 
-        image = embedBW(cover, bwImage);
+        image = embedBW(cover, bwImage); 
         return image;
+
+        }
+        catch (Exception e){
+            assert false;
+        }
+        return cover;
     }
 
     /**

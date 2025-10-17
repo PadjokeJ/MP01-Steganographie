@@ -86,7 +86,7 @@ public class TextSteganography {
         
         for (int y = 0; y < yLen; y++) {
             for (int x = 0; x < xLen; x++) {
-                message[y * yLen + x] = getLSB(image[y][x]);
+                message[y * xLen + x] = getLSB(image[y][x]);
             }
         }
 
@@ -146,7 +146,7 @@ public class TextSteganography {
         
         for (int i = 0; i < bits.length / Byte.SIZE; i++) {
             boolean[] bitArray = new boolean[Byte.SIZE];
-            for (int j = 7; j > 0; j--) {
+            for (int j = 0; j < 8; j++) {
                 bitArray[j] = bits[Byte.SIZE * i + j];
             }
             bytes[i] = Bit.toByte(bitArray);
