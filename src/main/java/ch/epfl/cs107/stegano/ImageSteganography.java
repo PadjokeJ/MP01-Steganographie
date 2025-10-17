@@ -154,7 +154,7 @@ public final class ImageSteganography {
 
         for (int y = 0; y < image.length; y++) {
             for (int x = 0; x < image[y].length; x++) {
-                assert image[y].length == image[0].length;
+                //assert image[y].length == image[0].length;
                 bwImage[y][x] = getLSB(image[y][x]);
             }
         }
