@@ -351,8 +351,8 @@ public final class Main {
         };
 
         int[][] hidden = TextSteganography.embedText(cover, TEXT);
-        for (int i = 0; i < 10; i++)
-            System.out.println(Arrays.toString(hidden[i]));
+        //for (int i = 0; i < 10; i++)
+        //    System.out.println(Arrays.toString(hidden[i]));
         return Arrays.deepEquals(EXPECTED_IMAGE, hidden) && Arrays.deepEquals(cover, new int[10][10]);
     }
 
@@ -375,9 +375,9 @@ public final class Main {
         var expected = new boolean[]{true, false, false, true};
         var actual = TextSteganography.revealBitArray(image);
         
-        for (int i = 0; i < 4; i++) {
-            System.out.println(expected[i] == actual[i]);
-        }
+        //for (int i = 0; i < 4; i++) {
+        //    System.out.println(expected[i] == actual[i]);
+        //}
 
         return Arrays.equals(expected, actual);
     }

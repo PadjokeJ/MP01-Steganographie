@@ -41,14 +41,14 @@ public class Challenge {
         assert count[80] == 6;
         /* We also see that there is a triple character at the end (lets attempt for ...) */
         byte[] decrypted = Decrypt.caesar(hint2, (byte) (255 - 149));
-        System.out.println(Text.toString(decrypted));
+        //System.out.println(Text.toString(decrypted));
         
         /* We find 0x37 as a hint */ 
         /* Let's decrypt the third hint with 0x37 and diverse algs */
 
         byte[] hint3 = Helper.read("challenge/hint3.txt");
         byte[] hi3decrypted = Decrypt.xor(hint3, (byte) 0x37);
-        System.out.println(Text.toString(hi3decrypted));
+        //System.out.println(Text.toString(hi3decrypted));
         /* KEYWORD=c4Ptur37hEfL46; IV_POS=120..136 */
 
         /* We find a keyword and a IV position */
@@ -56,7 +56,7 @@ public class Challenge {
         int[][] image1 = Helper.readImage("challenge/image1.png");
         byte[] textimage1 = TextSteganography.revealText(image1);
         byte[] image1decrypted = Decrypt.vigenere(textimage1, Text.toBytes("c4Ptur37hEfl46"));
-        System.out.println(Text.toString(image1decrypted).substring(120, 136));
+        //System.out.println(Text.toString(image1decrypted).substring(120, 136));
         
         byte[] posBytes = new byte[16];
         for (int i = 0; i < 16; i++) {
@@ -68,7 +68,7 @@ public class Challenge {
         byte[] textimage2 = TextSteganography.revealText(image2);
         
         byte[] image2decrypted = Decrypt.cbc(image1decrypted, posBytes);
-        System.out.println(Text.toString(image2decrypted).substring(0, 1000));
+        //System.out.println(Text.toString(image2decrypted).substring(0, 1000));
 
         return "";
     }
@@ -81,10 +81,10 @@ public class Challenge {
             counter[text[i] + 128] += 1;
         }
 
-        for (int i = 0; i < counter.length; i++ ) {
-            if (counter[i] > 0)
-                System.out.println("-" + i + "\t:  " + counter[i]);
-        }
+        //for (int i = 0; i < counter.length; i++ ) {
+        //    if (counter[i] > 0)
+        //        System.out.println("-" + i + "\t:  " + counter[i]);
+        //}
 
         return counter;
     }
