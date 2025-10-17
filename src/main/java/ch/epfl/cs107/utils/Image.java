@@ -131,6 +131,9 @@ public final class Image {
      * @return binary representation of a pixel
      */
     public static boolean binary(int gray, int threshold){
+        assert gray >= 0;
+        assert gray <= 255;
+
         return gray >= threshold;
     }
 
@@ -166,6 +169,15 @@ public final class Image {
     public static boolean[][] toBinary(int[][] image, int threshold){
         assert image != null;
 
+        for (int[] line: image) {
+            assert line != null;
+        }
+
+        if (image.length == 0)
+            return image;
+
+
+
         boolean[][] binary = new boolean[image.length][image[0].length];
         for (int x = 0; x < image.length; x++) {
             for (int y = 0; y < image[x].length; y++) {
@@ -183,6 +195,12 @@ public final class Image {
      */
     public static int[][] fromGray(int[][] image){
         assert image != null;
+        for (int[] line: image) {
+            assert line != null;
+        }
+
+        if (image.length == 0)
+            return image;
 
         int[][] pixels = new int[image.length][image[0].length];
         for (int x = 0; x < image.length; x++) {
@@ -202,6 +220,14 @@ public final class Image {
      */
     public static int[][] fromBinary(boolean[][] image){
         assert image != null;
+        for (int[] line: image) {
+            assert line != null;
+        }
+
+        if (image.length == 0)
+            return image;
+
+       
 
         int[][] pixels = new int[image.length][image[0].length];
         for (int x = 0; x < image.length; x++) {
