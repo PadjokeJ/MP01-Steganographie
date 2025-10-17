@@ -37,6 +37,7 @@ public final class Bit {
      */
     public static int embedInXthBit(int value, boolean m, int pos) {
         assert pos < 32;
+        assert pos >= 0;
 
         int mask = 1 << pos;
         mask = ~mask;
@@ -69,6 +70,7 @@ public final class Bit {
      */
     public static boolean getXthBit(int value, int pos) {
         assert pos < 32;
+        assert pos >= 0;
 
         return (value & (1 << pos)) != 0;
     }
