@@ -127,7 +127,6 @@ public final class Encrypt {
      */
     public static byte[] xor(byte[] plainText, byte key) {
         assert plainText != null;
-        assert key >0;
         byte[] bytes = new byte[plainText.length];
         for (int i =0; i<plainText.length;i++){
             bytes[i]=(byte)(plainText[i]^key);
@@ -149,7 +148,6 @@ public final class Encrypt {
     public static byte[] oneTimePad(byte[] plainText, byte[] pad) {
         assert plainText != null;
         assert pad != null;
-        assert pad.length >=1;
         assert pad.length==plainText.length;
         byte[] bytes = new byte[plainText.length];
         for (int i =0; i<plainText.length;i++){
