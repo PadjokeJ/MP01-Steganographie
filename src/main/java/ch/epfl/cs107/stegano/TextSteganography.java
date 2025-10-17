@@ -35,10 +35,12 @@ public class TextSteganography {
      */
     public static int[][] embedBitArray(int[][] cover, boolean[] message) {
         assert cover != null;
+        assert cover.length > 0;
+        assert cover[0] != null;
+        assert cover[0].length > 0;
+
         assert message != null;
 
-        assert cover.length > 0 && cover[0].length > 0;
-        
         int image[][] = new int[cover.length][cover[0].length];
         
         int maxEmbed = cover.length * cover[0].length;
@@ -61,6 +63,9 @@ public class TextSteganography {
      */
     public static boolean[] revealBitArray(int[][] image) {
         assert image != null;
+        assert image.length > 0;
+        assert image[0] != null;
+        assert image[0].length > 0;
 
         int xLen = image.length;
         int yLen = image[0].length;
