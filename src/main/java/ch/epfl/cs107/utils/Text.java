@@ -36,7 +36,7 @@ public final class Text {
      * @return bytes representation of the String in the <b>UTF-8</b> format
      */
     public static byte[] toBytes(String str){
-        assert string != null;
+        assert str != null;
         return str.getBytes(StandardCharsets.UTF_8);
     }
 
