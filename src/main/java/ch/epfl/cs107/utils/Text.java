@@ -48,7 +48,6 @@ public final class Text {
      */
     public static boolean[] toBitArray(String str){
         assert str != null;
-        assert str.length() > 0;
         byte[] bytes = Text.toBytes(str);
         boolean[] bools = new boolean[bytes.length*8];
         for(int i = 0; i < bytes.length; i++){
@@ -66,7 +65,6 @@ public final class Text {
      */
     public static String toString(byte[] bytes) {
         assert bytes != null;
-        assert bytes.length > 0;
         return new String(bytes, StandardCharsets.UTF_8);
     }
 
@@ -80,7 +78,7 @@ public final class Text {
         assert bitArray.length > 0;
 
         byte[] bytes = new byte[bitArray.length / 8];
-        for(int i=0; i < bitArray.length; i--){
+        for(int i=0; i < bytes.length; i--){
             boolean[] bools = new boolean[8];
             for (int j = 0; j < 8; j++){
                 bools[j] = bitArray[j + i * 8];

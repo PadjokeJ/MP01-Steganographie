@@ -78,6 +78,8 @@ public final class ImageSteganography {
         assert cover != null;
         assert !containsNullLines(grayImage);
         assert isRectangular(grayImage);
+        assert cover.length > 0;
+        assert grayImage.length > 0;
         
         // is valid gray
         for (int[] line: grayImage) {
@@ -152,6 +154,7 @@ public final class ImageSteganography {
 
         for (int x = 0; x < image.length; x++) {
             for (int y = 0; y < image[0].length; y++) {
+                assert image[x].length == image[0].length;
                 bwImage[x][y] = getLSB(image[x][y]);
             }
         }
