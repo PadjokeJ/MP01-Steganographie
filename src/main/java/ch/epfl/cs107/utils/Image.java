@@ -149,6 +149,7 @@ public final class Image {
      */
     public static int[][] toGray(int[][] image){
         assert image != null;
+        assert !image.equals([null]);
 
         if (image.length == 0)
             return image;
