@@ -90,25 +90,48 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] cbc(byte[] plainText, byte[] iv) {
-        assert plainText != null;
         assert iv != null;
-        assert iv.length >=1;
-        byte[] bytes = new byte[plainText.length];
-        for(int i=0;i<=plainText.length/iv.length;i++){
-            if (i<plainText.length/iv.length) {
-                for (int j = 0; j < iv.length; j++) {
-                    bytes[j + i * iv.length] = (byte) (plainText[j + i * iv.length] ^ iv[j]);
-                }
-                for (int j = 0; j < iv.length; j++) {
-                    iv[j] = bytes[j + i * iv.length];
-                }
-            }if(i==plainText.length/iv.length){
-                for (int j = 0; j < plainText.length%iv.length; j++) {
-                    bytes[j + i * iv.length] = (byte) (plainText[j + i * iv.length] ^ iv[j]);
-                }
+        assert plainText != null;
+        // iv ne doit pas être nul
+        assert iv.length > 0;
+
+        byte[] cipher = new byte[plainText.length];
+        byte[] ivCopy = iv.clone();
+
+        int blockSize = ivCopy.length;
+
+        // Pour compter le nombre de loop on diviser le nombre de lettre du texte par le nombre de lettre du pad
+        // et on regarde si il faut un tour en plus si il y a un reste
+        int numberOfLoop = (plainText.length / blockSize);
+        int remainingBytes = plainText.length % blockSize;
+
+        for (int i = 0; i < numberOfLoop; i++) {
+
+            for (int j = 0; j < blockSize; j++) {
+
+                // Variable qui contient l'index du char à changer dans cipher
+                int indexOfChar = i * blockSize + j;
+
+                cipher[indexOfChar] = (byte) (plainText[indexOfChar] ^ ivCopy[j]);
+
+                // ensuite on remplace la valeur de pad par ce qu'on vient
+                // de calculer pour le prochain tour
+                ivCopy[j] = cipher[indexOfChar];
             }
+
         }
-        return bytes;
+
+
+        // On boucle sur les derniers char
+        for (int i = 0; i < remainingBytes; i++) {
+
+            // Variable qui donne l'index du char à changer dans cipher[]
+            int indexToChange = (numberOfLoop * blockSize) + i;
+
+            cipher[indexToChange] = (byte) (plainText[indexToChange] ^ ivCopy[i]);
+        }
+
+        return cipher;
     }
 
     // ============================================================================================
