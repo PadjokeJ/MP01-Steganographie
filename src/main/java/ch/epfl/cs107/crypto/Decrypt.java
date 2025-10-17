@@ -36,11 +36,10 @@ public final class Decrypt {
      */
     public static byte[] caesar(byte[] cipher, byte key) {
         assert cipher != null;
-        assert key > 0;
         byte[] bytes = new byte[cipher.length];
         for(int i=0;i<cipher.length;i++) {
             if (cipher[i] - key < -128) {
-                bytes[i] = (byte) (cipher[i] - key + 255);
+                bytes[i] = (byte) (cipher[i] - key + 256);
             }
             if (cipher[i] - key >= -128) {
                 bytes[i] = (byte) (cipher[i] - key);
@@ -62,11 +61,12 @@ public final class Decrypt {
     public static byte[] vigenere(byte[] cipher, byte[] keyword) {
         assert cipher!= null;
         assert keyword != null;
+        assert keyword.length>=1;
         byte[] bytes = new byte[cipher.length];
         for(int i=0;i<cipher.length;i++){
             int pos = i % keyword.length;
             if (cipher[i] - keyword[pos] < -128) {
-                bytes[i] = (byte) (cipher[i] - keyword[pos] + 255);
+                bytes[i] = (byte) (cipher[i] - keyword[pos] + 256);
             }
             if (cipher[i] - keyword[pos] >=-128) {
                 bytes[i] = (byte) (cipher[i] - keyword[pos]);
@@ -91,7 +91,9 @@ public final class Decrypt {
         assert iv.length >=1;
         byte[] bytes = new byte[cipher.length];
         for(int i=cipher.length/iv.length;i>=0;i--){
-            if(i==cipher.length/iv.length){
+            if(cipher.length==0) {
+                return bytes;
+            }if(i==cipher.length/iv.length){
                 for (int j=0;j<cipher.length%iv.length;j++){
                     bytes[j + i * iv.length] = (byte) (cipher[j + i * iv.length] ^ cipher[j + (i-1) * iv.length]);
                 }
