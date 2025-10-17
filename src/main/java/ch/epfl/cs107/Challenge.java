@@ -67,7 +67,7 @@ public class Challenge {
         int[][] image2 = Helper.readImage("challenge/image2.png");
         byte[] textimage2 = TextSteganography.revealText(image2);
         
-        byte[] image2decrypted = Decrypt.cbc(image1decrypted, posBytes);
+        byte[] image2decrypted = Decrypt.cbc(textimage2, posBytes);
         //System.out.println(Text.toString(image2decrypted).substring(0, 1000));
 
         return "";

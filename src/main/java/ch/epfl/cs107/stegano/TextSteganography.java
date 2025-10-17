@@ -72,19 +72,21 @@ public class TextSteganography {
         if (image.length > 0)
             assert image[0] != null;
 
-        int xLen = image.length;
-        int yLen = image[0].length;
+        int yLen = image.length;
+        int xLen = 0;
+        if (yLen != 0)
+            xLen = image[0].length;
         
-        boolean[] message = new boolean[xLen * yLen * 8];
+        boolean[] message = new boolean[xLen * yLen];
         if (message.length == 0)
             return message;
         for (int[] l : image) {
             assert l.length == image[0].length;
         }
-
-        for (int x = 0; x < xLen; x++) {
-            for (int y = 0; y < yLen; y++) {
-                message[x * yLen + y] = getLSB(image[y][x]);
+        
+        for (int y = 0; y < yLen; y++) {
+            for (int x = 0; x < xLen; x++) {
+                message[y * yLen + x] = getLSB(image[y][x]);
             }
         }
 
@@ -105,8 +107,10 @@ public class TextSteganography {
      */
     public static int[][] embedText(int[][] cover, byte[] message) {
         assert message != null;
+        assert cover != null;
         
         for (int[] l : cover) {
+            assert l != null;
             assert l.length == cover[0].length;
         }
         boolean[] bits = new boolean[message.length * 8];
@@ -136,7 +140,7 @@ public class TextSteganography {
         }
 
         boolean[] bits = revealBitArray(image);
-        byte[] bytes = new byte[bits.length / 8];
+        byte[] bytes = new byte[bits.length / 8 + 8];
         for (int i = 0; i < bytes.length; i++) {
             boolean[] bitArray = new boolean[8];
             for (int j = 0; j < 8; j++) {
