@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  * @since 1.0.0
  */
 public class Challenge {
-    public static int IV_LEN = 18;
+    public static int IV_LEN = 16;
     // DO NOT CHANGE THIS, MORE ON THAT ON WEEK 7
     private Challenge(){}
 
@@ -40,8 +40,8 @@ public class Challenge {
         /* We find that 80 comes up the most often */
         assert count[80] == 6;
         /* We also see that there is a triple character at the end (lets attempt for ...) */
-        byte[] decrypted = Decrypt.caesar(hint2, (byte) (255 - 149));
-        //System.out.println(Text.toString(decrypted));
+        byte[] decrypted = Decrypt.caesar(hint2, (byte) (255 - 148));
+        System.out.println(Text.toString(decrypted));
         
         /* We find 0x37 as a hint */ 
         /* Let's decrypt the third hint with 0x37 and diverse algs */
@@ -56,22 +56,35 @@ public class Challenge {
         int[][] image1 = Helper.readImage("challenge/image1.png");
         byte[] textimage1 = TextSteganography.revealText(image1);
         byte[] image1decrypted = Decrypt.vigenere(textimage1, Text.toBytes("c4Ptur37hEfl46"));
-        //System.out.println(Text.toString(image1decrypted).substring(120, 136));
+        System.out.println(Text.toString(image1decrypted).substring(120, 136));
         
-        byte[] posBytes = new byte[IV_LEN];
+        byte[] posBytes1 = new byte[IV_LEN - 3];
         for (int i = 3; i < IV_LEN; i++) {
             int k = 120 + i;
-            posBytes[i - 3] = image1decrypted[k];
+            posBytes1[i - 3] = image1decrypted[k];
         }
-        //System.out.println(Text.toString(posBytes));
+        System.out.println(Text.toString(posBytes1));
+        
+        byte[] posBytes = Text.toBytes("UV9L2k!dA4rT0");
+        
+        int j = 0;
+        //assert posBytes.length == posBytes1.length;
+        for (byte i: posBytes) {
+            System.out.println(posBytes1[j] + " : " + i);
+            //assert i == (posBytes1[j]);
+            
+            j++;
+        }
 
         int[][] image2 = Helper.readImage("challenge/image2.png");
         byte[] textimage2 = TextSteganography.revealText(image2);
-//        textimage2[0] -= 32;
+        textimage2[0] -= 32;
         System.out.println(textimage2[0]);
         
-        byte[] image2decrypted = Encrypt.cbc(textimage2, posBytes);
+        byte[] image2decrypted = Decrypt.cbc(textimage2, posBytes1);
         String solString = Text.toString(image2decrypted);
+        System.out.println(Text.toString(Decrypt.cbc(textimage2, posBytes1)).substring(0, 100));
+
         int posMax = solString.indexOf('}') + 1;
         System.out.println(Text.toString(image2decrypted).substring(0, posMax));
 

@@ -86,29 +86,42 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] cbc(byte[] cipher, byte[] iv) {
-        assert cipher != null;
         assert iv != null;
-        assert iv.length >=1;
-        byte[] bytes = new byte[cipher.length];
-        for(int i=cipher.length/iv.length;i>=0;i--){
-            if(cipher.length==0) {
-                return bytes;
-            }if(i==cipher.length/iv.length){
-                for (int j=0;j<cipher.length%iv.length;j++){
-                    bytes[j + i * iv.length] = (byte) (cipher[j + i * iv.length] ^ cipher[j + (i-1) * iv.length]);
-                }
-            }if(i==0){
-                for (int j=0;j<iv.length;j++) {
-                    bytes[j + i * iv.length] = (byte) (cipher[j + i * iv.length] ^ iv[j]);
-                }
-            }if(0 < i && i < cipher.length/iv.length){
-                for (int j=0;j<iv.length;j++){
-                    bytes[j + i * iv.length] = (byte) (cipher[j + i * iv.length] ^ cipher[j + (i-1) * iv.length]);
-                }
+        assert cipher != null;
+        assert iv.length > 0;
+
+        // La réciproque est très similaire à Encrypt
+        // il y a seulement un détail qui change ci-dessous
+
+        byte[] plainText = new byte[cipher.length];
+        byte[] ivCopy = iv.clone();
+
+        int blockSize = ivCopy.length;
+        int numberOfBlocks = cipher.length / blockSize;
+        int remainingBytes = cipher.length % blockSize;
+
+        for (int i = 0; i < numberOfBlocks; i++) {
+            for (int j = 0; j < blockSize; j++) {
+                int index = i * blockSize + j;
+                plainText[index] = (byte) (cipher[index] ^ ivCopy[j]);
+
+                // La seule chose qui change avec encrypt
+                // est que le prochain iv est cipher[index] et non
+                // plainText[index]
+                // Autrement dit on inverse pas exactement ici
+                // tandis que l'on inverse partout
+                // plainText et cipherText dans le reste du code)
+                ivCopy[j] = cipher[index];
             }
         }
-        return bytes;
-    }
+
+        for (int i = 0; i < remainingBytes; i++) {
+            int index = numberOfBlocks * blockSize + i;
+            plainText[index] = (byte) (cipher[index] ^ ivCopy[i]);
+        }
+
+        return plainText;
+        }
 
     // ============================================================================================
     // =================================== XOR'S ENCRYPTION =======================================
