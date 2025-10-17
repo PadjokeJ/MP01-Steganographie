@@ -71,9 +71,9 @@ public class Challenge {
         byte[] image2decrypted = Decrypt.cbc(textimage2, posBytes);
         String solString = Text.toString(image2decrypted);
         int posMax = solString.indexOf('}');
-        System.out.println(Text.toString(image2decrypted).substring(0, 1000));
+        System.out.println(Text.toString(image2decrypted).substring(0, posMax));
 
-        return "FLAG{C5-IO7}";
+        return solString.substring(0, posMax);
     }
 
     public static int[] freqAnalysis(byte[] text) {
