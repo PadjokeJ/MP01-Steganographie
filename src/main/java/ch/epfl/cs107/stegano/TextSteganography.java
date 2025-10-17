@@ -44,7 +44,7 @@ public class TextSteganography {
         int image[][] = new int[cover.length][cover[0].length];
         
         for (int i = 0; i < cover.length; i++) {
-            for (int j = 0; j < cover[j].length; j++) {
+            for (int j = 0; j < cover[i].length; j++) {
                 image[i][j] = cover[i][j];
             }
         }

@@ -152,10 +152,10 @@ public final class ImageSteganography {
 
         boolean[][] bwImage = new boolean[image.length][image[0].length];
 
-        for (int x = 0; x < image.length; x++) {
-            for (int y = 0; y < image[0].length; y++) {
-                assert image[x].length == image[0].length;
-                bwImage[x][y] = getLSB(image[x][y]);
+        for (int y = 0; y < image.length; y++) {
+            for (int x = 0; x < image[y].length; x++) {
+                assert image[y].length == image[0].length;
+                bwImage[y][x] = getLSB(image[y][x]);
             }
         }
 

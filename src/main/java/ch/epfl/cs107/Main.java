@@ -365,7 +365,8 @@ public final class Main {
         Helper.show(hidden, "hidden");
         var steg = ImageSteganography.embedARGB(cover, image, IMAGE_THRESHOLD);
         Helper.show(steg, "steg");
-
+        var stegcode = Image.fromBinary(ImageSteganography.revealBW(hidden));
+        Helper.show(stegcode, "aa");
         boolean condition = Arrays.deepEquals(steg, hidden);
         return condition;
     }
