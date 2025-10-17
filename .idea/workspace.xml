@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f9e37c23-b7a4-4439-8493-963da2286cc9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/epfl/cs107/crypto/Decrypt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/epfl/cs107/crypto/Decrypt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/epfl/cs107/crypto/Encrypt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/epfl/cs107/crypto/Encrypt.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

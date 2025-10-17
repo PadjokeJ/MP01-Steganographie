@@ -41,7 +41,7 @@ public final class Decrypt {
         byte[] bytes = new byte[cipher.length];
         for(int i=0;i<cipher.length;i++) {
             if (cipher[i] - key < -128) {
-                bytes[i] = (byte) (cipher[i] - key + 0xFF+1);
+                bytes[i] = (byte) (cipher[i] - key + 256);
             }
             if (cipher[i] - key >= -128) {
                 bytes[i] = (byte) (cipher[i] - key);
@@ -69,7 +69,7 @@ public final class Decrypt {
         for(int i=0;i<cipher.length;i++){
             int pos = i % keyword.length;
             if (cipher[i] - keyword[pos] < -128) {
-                bytes[i] = (byte) (cipher[i] - keyword[pos] + 0xFF+1);
+                bytes[i] = (byte) (cipher[i] - keyword[pos] + 256);
             }
             if (cipher[i] - keyword[pos] >=-128) {
                 bytes[i] = (byte) (cipher[i] - keyword[pos]);
@@ -90,7 +90,6 @@ public final class Decrypt {
      */
     public static byte[] cbc(byte[] cipher, byte[] iv) {
         assert cipher != null;
-        assert cipher.length >=1;
         assert iv != null;
         assert iv.length >=1;
         byte[] bytes = new byte[cipher.length];
