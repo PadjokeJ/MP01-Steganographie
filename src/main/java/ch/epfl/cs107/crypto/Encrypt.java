@@ -37,12 +37,10 @@ public final class Encrypt {
      */
     public static byte[] caesar(byte[] plainText, byte key) {
         assert plainText != null;
-        assert plainText.length >=1;
-        assert key > 0;
         byte[] bytes = new byte[plainText.length];
         for(int i=0;i<plainText.length;i++){
             if(plainText[i]+key>127){
-                bytes[i]= (byte) (plainText[i]+key-255);
+                bytes[i]= (byte) (plainText[i]+key-256);
             }if(plainText[i]+key<=127){
                 bytes[i]= (byte) (plainText[i]+key);
             }
@@ -64,14 +62,13 @@ public final class Encrypt {
      */
     public static byte[] vigenere(byte[] plainText, byte[] keyword) {
         assert plainText != null;
-        assert plainText.length >=1;
         assert keyword != null;
         assert keyword.length >=1;
         byte[] bytes = new byte[plainText.length];
         for(int i=0;i<plainText.length;i++){
             int pos = i % keyword.length;
             if (plainText[i] + keyword[pos] > 127) {
-                bytes[i] = (byte) (plainText[i] + keyword[pos] - 255);
+                bytes[i] = (byte) (plainText[i] + keyword[pos] - 256);
             }
             if (plainText[i] + keyword[pos] <= 127) {
                 bytes[i] = (byte) (plainText[i] + keyword[pos]);
@@ -94,7 +91,6 @@ public final class Encrypt {
      */
     public static byte[] cbc(byte[] plainText, byte[] iv) {
         assert plainText != null;
-        assert plainText.length >=1;
         assert iv != null;
         assert iv.length >=1;
         byte[] bytes = new byte[plainText.length];
