@@ -38,6 +38,7 @@ public final class Encrypt {
     public static byte[] caesar(byte[] plainText, byte key) {
         assert plainText != null;
         assert plainText.length >=1;
+        assert key > 0;
         byte[] bytes = new byte[plainText.length];
         for(int i=0;i<plainText.length;i++){
             if(plainText[i]+key>127){
@@ -64,6 +65,8 @@ public final class Encrypt {
     public static byte[] vigenere(byte[] plainText, byte[] keyword) {
         assert plainText != null;
         assert plainText.length >=1;
+        assert keyword != null;
+        assert keyword.length >=1;
         byte[] bytes = new byte[plainText.length];
         for(int i=0;i<plainText.length;i++){
             int pos = i % keyword.length;
@@ -92,6 +95,8 @@ public final class Encrypt {
     public static byte[] cbc(byte[] plainText, byte[] iv) {
         assert plainText != null;
         assert plainText.length >=1;
+        assert iv != null;
+        assert iv.length >=1;
         byte[] bytes = new byte[plainText.length];
         for(int i=0;i<=plainText.length/iv.length;i++){
             if (i<plainText.length/iv.length) {
@@ -123,6 +128,7 @@ public final class Encrypt {
     public static byte[] xor(byte[] plainText, byte key) {
         assert plainText != null;
         assert plainText.length >=1;
+        assert key >0;
         byte[] bytes = new byte[plainText.length];
         for (int i =0; i<plainText.length;i++){
             bytes[i]=(byte)(plainText[i]^key);
@@ -144,6 +150,8 @@ public final class Encrypt {
     public static byte[] oneTimePad(byte[] plainText, byte[] pad) {
         assert plainText != null;
         assert plainText.length >=1;
+        assert pad != null;
+        assert pad.length >=1;
         byte[] bytes = new byte[plainText.length];
         for (int i =0; i<plainText.length;i++){
             int pos = i % pad.length;

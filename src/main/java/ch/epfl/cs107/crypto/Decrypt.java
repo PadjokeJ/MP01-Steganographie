@@ -37,6 +37,7 @@ public final class Decrypt {
     public static byte[] caesar(byte[] cipher, byte key) {
         assert cipher != null;
         assert cipher.length >=1;
+        assert key > 0;
         byte[] bytes = new byte[cipher.length];
         for(int i=0;i<cipher.length;i++) {
             if (cipher[i] - key < -128) {
@@ -62,6 +63,8 @@ public final class Decrypt {
     public static byte[] vigenere(byte[] cipher, byte[] keyword) {
         assert cipher!= null;
         assert cipher.length >=1;
+        assert keyword != null;
+        assert keyword.length >=1;
         byte[] bytes = new byte[cipher.length];
         for(int i=0;i<cipher.length;i++){
             int pos = i % keyword.length;
@@ -88,6 +91,8 @@ public final class Decrypt {
     public static byte[] cbc(byte[] cipher, byte[] iv) {
         assert cipher != null;
         assert cipher.length >=1;
+        assert iv != null;
+        assert iv.length >=1;
         byte[] bytes = new byte[cipher.length];
         for(int i=cipher.length/iv.length;i>=0;i--){
             if(i==cipher.length/iv.length){
