@@ -23,6 +23,15 @@ public final class ImageSteganography {
     // DO NOT CHANGE THIS, MORE ON THAT ON WEEK 7
     private ImageSteganography(){}
     
+    static boolean isRectangular(int[][] image) {
+        int ll = image[0].length;
+        for (int[] line: image) {
+            if (ll != line.length)
+                return false;
+        }
+        return true;
+    }
+
     static boolean containsNullLines(int[][] image) {
         for (int[] line: image) {
             if (line == null) {
@@ -47,6 +56,7 @@ public final class ImageSteganography {
         assert argbImage != null;
         assert cover != null;
         assert !containsNullLines(argbImage);
+        assert isRectangular(argbImage);
 
         int[][] image;
         int[][] grayImage;
@@ -67,6 +77,14 @@ public final class ImageSteganography {
         assert grayImage != null;
         assert cover != null;
         assert !containsNullLines(grayImage);
+        assert isRectangular(grayImage);
+        
+        // is valid gray
+        for (int[] line: grayImage) {
+            for (int pixel: line) {
+                assert pixel >= 0 && pixel <= 255;
+            }
+        }
 
         int[][] image;
         boolean[][] bwImage;
@@ -86,15 +104,19 @@ public final class ImageSteganography {
         assert load != null;
         assert cover != null;
 
+        assert load.length > 0;
+        assert cover.length > 0;
+
         assert !containsNullLines(cover);
         
         assert load[0] != null;
 
-        assert cover.length > 0 && cover[0].length > 0;
-        assert load.length > 0 && load[0].length > 0;
+        assert cover[0].length > 0;
+        assert load[0].length > 0;
 
         assert (cover.length >= load.length) && (cover[0].length >= load[0].length);
-
+        
+        assert isRectangular(cover);
 
         int[][] image = new int[cover.length][cover[0].length];
         
