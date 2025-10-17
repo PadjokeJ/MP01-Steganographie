@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  * @since 1.0.0
  */
 public class Challenge {
-    public static int IV_LEN = 16;
+    public static int IV_LEN = 18;
     // DO NOT CHANGE THIS, MORE ON THAT ON WEEK 7
     private Challenge(){}
 
@@ -67,10 +67,12 @@ public class Challenge {
 
         int[][] image2 = Helper.readImage("challenge/image2.png");
         byte[] textimage2 = TextSteganography.revealText(image2);
+//        textimage2[0] -= 32;
+        System.out.println(textimage2[0]);
         
-        byte[] image2decrypted = Decrypt.cbc(textimage2, posBytes);
+        byte[] image2decrypted = Encrypt.cbc(textimage2, posBytes);
         String solString = Text.toString(image2decrypted);
-        int posMax = solString.indexOf('}');
+        int posMax = solString.indexOf('}') + 1;
         System.out.println(Text.toString(image2decrypted).substring(0, posMax));
 
         return solString.substring(0, posMax);
