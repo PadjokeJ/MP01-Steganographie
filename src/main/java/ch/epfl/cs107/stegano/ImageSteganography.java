@@ -81,6 +81,7 @@ public final class ImageSteganography {
         assert cover.length > 0;
         assert grayImage.length > 0;
         
+        
         // is valid gray
         for (int[] line: grayImage) {
             for (int pixel: line) {

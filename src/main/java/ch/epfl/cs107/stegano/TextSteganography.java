@@ -146,7 +146,7 @@ public class TextSteganography {
         
         for (int i = 0; i < bits.length / Byte.SIZE; i++) {
             boolean[] bitArray = new boolean[Byte.SIZE];
-            for (int j = 0; j < Byte.SIZE; j++) {
+            for (int j = 7; j > 0; j--) {
                 bitArray[j] = bits[Byte.SIZE * i + j];
             }
             bytes[i] = Bit.toByte(bitArray);
