@@ -231,7 +231,7 @@ public final class Image {
             scndL = image[0].length;
         int[][] pixels = new int[image.length][scndL];
         for (int x = 0; x < image.length; x++) {
-            for (int y = 0; y < image.length; y++) {
+            for (int y = 0; y < image[0].length; y++) {
                 int color = 0xFF000000;
                 if (image[x][y]) {
                     color = 0xFFFFFFFF;

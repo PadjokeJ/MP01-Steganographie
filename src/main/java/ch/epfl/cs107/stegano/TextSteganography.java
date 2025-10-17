@@ -10,7 +10,7 @@ import static ch.epfl.cs107.stegano.TextSteganography.*;
 import static ch.epfl.cs107.crypto.Encrypt.*;
 import static ch.epfl.cs107.crypto.Decrypt.*;
 import static ch.epfl.cs107.Main.*;
-
+import ch.epfl.cs107.utils.Bit;
 /**
  * <b>Task 3.2: </b>Utility class to perform Text Steganography
  *
@@ -132,6 +132,8 @@ public class TextSteganography {
     public static byte[] revealText(int[][] image) {
         assert image != null;
         assert image.length > 0;
+
+        assert image[0] != null;
         assert image[0].length > 0;
         
         for (int[] l : image) {
@@ -140,13 +142,14 @@ public class TextSteganography {
         }
 
         boolean[] bits = revealBitArray(image);
-        byte[] bytes = new byte[bits.length / 8 + 8];
-        for (int i = 0; i < bytes.length; i++) {
-            boolean[] bitArray = new boolean[8];
-            for (int j = 0; j < 8; j++) {
-                bitArray[j] = bits[8 * i + j];
+        byte[] bytes = new byte[bits.length / Byte.SIZE];
+        
+        for (int i = 0; i < bits.length / Byte.SIZE; i++) {
+            boolean[] bitArray = new boolean[Byte.SIZE];
+            for (int j = 0; j < Byte.SIZE; j++) {
+                bitArray[j] = bits[Byte.SIZE * i + j];
             }
-            bytes[i] = toByte(bitArray);
+            bytes[i] = Bit.toByte(bitArray);
         }
         return bytes;
     }
