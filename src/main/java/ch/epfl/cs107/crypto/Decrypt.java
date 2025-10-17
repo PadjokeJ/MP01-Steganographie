@@ -100,7 +100,7 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] xor(byte[] cipher, byte key) {
-        return Helper.fail("NOT IMPLEMENTED");
+        return Encrypt.xor(cipher, key);
     }
 
     // ============================================================================================
