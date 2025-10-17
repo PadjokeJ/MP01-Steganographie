@@ -73,7 +73,7 @@ public final class Main {
         // ========== Test Cryptography Methods ==========
         String message = "La vie est un long fleuve tranquille :-)";
         String key = "2cF%5";
-        //testCrypto(message, key);
+        testCrypto(message, key);
         //message = Text.toString(Helper.read("text_one.txt"));
         //testCrypto(message, key);
         Helper.dialog("Tests ", "Cryptography passed");
@@ -245,7 +245,7 @@ public final class Main {
         //Decoding with key
         byte[] decryptedAsBytes = Decrypt.caesar(result, key);
         String decryptedAsString = Text.toString(decryptedAsBytes);
-        //System.out.println("Decoded : " + decryptedAsString); // uncomment to debug
+        System.out.println("Decoded : " + decryptedAsString); // uncomment to debug
         return Arrays.equals(string, decryptedAsBytes);
     }
 

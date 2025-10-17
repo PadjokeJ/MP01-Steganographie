@@ -36,6 +36,8 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] caesar(byte[] plainText, byte key) {
+        assert plainText != null;
+        assert plainText.length >=1;
         byte[] bytes = new byte[plainText.length];
         for(int i=0;i<plainText.length;i++){
             if(plainText[i]+key>127){
@@ -60,8 +62,22 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] vigenere(byte[] plainText, byte[] keyword) {
-        return Helper.fail("NOT IMPLEMENTED");
-    }
+        assert plainText != null;
+        assert plainText.length >=1;
+        byte[] bytes = new byte[plainText.length];
+        for(int i=0;i<plainText.length;i++){
+            int pos = i % keyword.length;
+            if (plainText[i] + keyword[pos] > 127) {
+                bytes[i] = (byte) (plainText[i] + keyword[pos] - 255);
+            }
+            if (plainText[i] + keyword[pos] <= 127) {
+                bytes[i] = (byte) (plainText[i] + keyword[pos]);
+            }
+        }
+        return bytes;
+        }
+
+
 
     // ============================================================================================
     // =================================== CBC'S ENCRYPTION =======================================
