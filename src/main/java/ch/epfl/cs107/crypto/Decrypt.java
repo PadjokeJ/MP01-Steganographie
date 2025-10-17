@@ -100,7 +100,7 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] xor(byte[] cipher, byte key) {
-        return Helper.fail("NOT IMPLEMENTED");
+        return Encrypt.xor(cipher, key);
     }
 
     // ============================================================================================
@@ -114,7 +114,7 @@ public final class Decrypt {
      * @return decoded message
      */
     public static byte[] oneTimePad(byte[] cipher, byte[] pad) {
-        return Helper.fail("NOT IMPLEMENTED");
+        return Encrypt.oneTimePad(cipher,pad) ;
     }
 
 }

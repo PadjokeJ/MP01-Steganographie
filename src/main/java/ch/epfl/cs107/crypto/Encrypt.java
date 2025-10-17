@@ -90,7 +90,24 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] cbc(byte[] plainText, byte[] iv) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert plainText != null;
+        assert plainText.length >=1;
+        byte[] bytes = new byte[plainText.length];
+        for(int i=0;i<=plainText.length/iv.length;i++){
+            if (i<plainText.length/iv.length) {
+                for (int j = 0; j < iv.length; j++) {
+                    bytes[j + i * iv.length] = (byte) (plainText[j + i * iv.length] ^ iv[j]);
+                }
+                for (int j = 0; j < iv.length; j++) {
+                    iv[j] = bytes[j + i * iv.length];
+                }
+            }if(i==plainText.length/iv.length){
+                for (int j = 0; j < plainText.length%iv.length; j++) {
+                    bytes[j + i * iv.length] = (byte) (plainText[j + i * iv.length] ^ iv[j]);
+                }
+            }
+        }
+        return bytes;
     }
 
     // ============================================================================================
@@ -104,7 +121,13 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] xor(byte[] plainText, byte key) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert plainText != null;
+        assert plainText.length >=1;
+        byte[] bytes = new byte[plainText.length];
+        for (int i =0; i<plainText.length;i++){
+            bytes[i]=(byte)(plainText[i]^key);
+        }
+        return bytes;
     }
 
     // ============================================================================================
@@ -119,7 +142,14 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] oneTimePad(byte[] plainText, byte[] pad) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert plainText != null;
+        assert plainText.length >=1;
+        byte[] bytes = new byte[plainText.length];
+        for (int i =0; i<plainText.length;i++){
+            int pos = i % pad.length;
+            bytes[i]=(byte)(plainText[i]^pad[pos]);
+        }
+        return bytes;
     }
 
     /**
@@ -129,7 +159,8 @@ public final class Encrypt {
      * @param result Array containing the result after the execution
      */
     public static void oneTimePad(byte[] plainText, byte[] pad, byte[] result) {
-        Helper.fail("NOT IMPLEMENTED");
+        pad = Helper.generateRandomBytes(plainText.length);
+        result = Encrypt.oneTimePad(plainText,pad);
     }
 
 }
