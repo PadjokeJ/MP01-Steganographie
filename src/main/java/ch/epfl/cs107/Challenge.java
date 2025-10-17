@@ -55,7 +55,7 @@ public class Challenge {
         /* Let's decrypt images */
         int[][] image1 = Helper.readImage("challenge/image1.png");
         byte[] textimage1 = TextSteganography.revealText(image1);
-        byte[] image1decrypted = Decrypt.vigenere(textimage1, Text.toBytes("c4Ptur37hEfl46"));
+        byte[] image1decrypted = Decrypt.vigenere(textimage1, Text.toBytes("c4Ptur37hEfL46"));
         System.out.println(Text.toString(image1decrypted).substring(120, 136));
         
         byte[] posBytes1 = new byte[IV_LEN - 3];
@@ -78,7 +78,7 @@ public class Challenge {
 
         int[][] image2 = Helper.readImage("challenge/image2.png");
         byte[] textimage2 = TextSteganography.revealText(image2);
-        textimage2[0] -= 32;
+        //textimage2[0] -= 32;
         System.out.println(textimage2[0]);
         
         byte[] image2decrypted = Decrypt.cbc(textimage2, posBytes1);
@@ -87,7 +87,6 @@ public class Challenge {
 
         int posMax = solString.indexOf('}') + 1;
         System.out.println(Text.toString(image2decrypted).substring(0, posMax));
-
         return solString.substring(0, posMax);
     }
 
