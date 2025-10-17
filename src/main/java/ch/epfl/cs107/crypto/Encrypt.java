@@ -90,7 +90,24 @@ public final class Encrypt {
      * @return an encoded byte array
      */
     public static byte[] cbc(byte[] plainText, byte[] iv) {
-        return Helper.fail("NOT IMPLEMENTED");
+        assert plainText != null;
+        assert plainText.length >=1;
+        byte[] bytes = new byte[plainText.length];
+        for(int i=0;i<=plainText.length/iv.length;i++){
+            if (i<plainText.length/iv.length) {
+                for (int j = 0; j < iv.length; j++) {
+                    bytes[j + i * iv.length] = (byte) (plainText[j + i * iv.length] ^ iv[j]);
+                }
+                for (int j = 0; j < iv.length; j++) {
+                    iv[j] = bytes[j + i * iv.length];
+                }
+            }if(i==plainText.length/iv.length){
+                for (int j = 0; j < plainText.length%iv.length; j++) {
+                    bytes[j + i * iv.length] = (byte) (plainText[j + i * iv.length] ^ iv[j]);
+                }
+            }
+        }
+        return bytes;
     }
 
     // ============================================================================================
