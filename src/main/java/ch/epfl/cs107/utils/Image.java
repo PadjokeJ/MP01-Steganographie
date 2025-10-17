@@ -173,10 +173,6 @@ public final class Image {
             assert line != null;
         }
 
-        if (image.length == 0)
-            return image;
-
-
 
         boolean[][] binary = new boolean[image.length][image[0].length];
         for (int x = 0; x < image.length; x++) {
@@ -220,14 +216,9 @@ public final class Image {
      */
     public static int[][] fromBinary(boolean[][] image){
         assert image != null;
-        for (int[] line: image) {
+        for (boolean[] line: image) {
             assert line != null;
         }
-
-        if (image.length == 0)
-            return image;
-
-       
 
         int[][] pixels = new int[image.length][image[0].length];
         for (int x = 0; x < image.length; x++) {
