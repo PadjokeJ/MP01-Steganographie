@@ -63,17 +63,13 @@ public class Challenge {
         byte[] textimage1 = TextSteganography.revealText(image1);
         /* A keyword is the technical term for the key in vigenere, so let's use that */
         byte[] image1decrypted = Decrypt.vigenere(textimage1, Text.toBytes(hint3KeywordStr));
-        System.out.println(Text.toString(image1decrypted).substring(120, 136));
+        String image1Str = Text.toString(image1decrypted).substring(120, 136);
+        System.out.println(image1Str);
         
         // Let's truncate out the "IV:"
         byte[] posBytes1 = new byte[IV_LEN - 3];
-        for (int i = 3; i < IV_LEN; i++) {
-            int k = 120 + i;
-            posBytes1[i - 3] = image1decrypted[k];
-        }
-        
-        byte[] posBytes = posBytes1; //Text.toBytes("UV9L2k!dA4rT0");
-        
+        posBytes1 = Text.toBytes(image1Str.split(":")[1]);
+
         /* Let's reveal the second image */
         int[][] image2 = Helper.readImage("challenge/image2.png");
         byte[] textimage2 = TextSteganography.revealText(image2);
@@ -84,9 +80,10 @@ public class Challenge {
         
         /* Let's truncate out the flag until the ending curly bracket */
         int posMax = solString.indexOf('}') + 1;
-        System.out.println(Text.toString(image2decrypted).substring(0, posMax));
+        String flag = solString.substring(0, posMax);
+        System.out.println(flag);
         /* We find the flag FLAG{C5-IO7;F0r743w1Nn} */
-        return solString.substring(0, posMax);
+        return flag;
     }
 
     public static int[] freqAnalysis(byte[] text) {
