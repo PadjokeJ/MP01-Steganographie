@@ -9,7 +9,7 @@ Si le fait que ce projet est public est un problème, veuillez nous contacter :)
 100/100 - selon le correcteur automatique
 
 <details>  
-<summary><b>:mag: Checklist du projet<b></summary>
+<summary><b>:mag: Checklist du projet</b></summary>
 
 ### utils
 
