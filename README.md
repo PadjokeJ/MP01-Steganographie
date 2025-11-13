@@ -2,6 +2,8 @@
 
 MP-01 de CS107 à l'EPFL, rédigé par Arthur Delémont (arthur.delemont \[at\] epfl.ch) et Jonatan Pfister (jonatan.pfister \[at\] epfl.ch)
 
+Si le fait que ce projet est public est un problème, veuillez nous contacter :)
+
 ## Checklist
 
 100/100 - selon le correcteur automatique
