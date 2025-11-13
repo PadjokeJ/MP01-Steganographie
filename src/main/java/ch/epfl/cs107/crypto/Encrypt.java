@@ -14,7 +14,7 @@ import static ch.epfl.cs107.Main.*;
 /**
  * <b>Task 2: </b>Utility class to encrypt a given plain text.
  *
- * @author Hamza REMMAL (hamza.remmal@epfl.ch)
+ * @author Arthur Delémont (arthur.delemont@epfl.ch)
  * @version 1.0.0
  * @since 1.0.0
  */
